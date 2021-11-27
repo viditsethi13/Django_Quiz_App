@@ -1,0 +1,13 @@
+h1,label{
+	color:green;
+}
+
+span{
+	font-weight: bold;
+}
+
+img{
+	border: 2px solid green;
+	height: 290px;
+	width: 450px;
+}

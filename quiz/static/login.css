@@ -1,0 +1,18 @@
+h1,label{
+	color:green;
+}
+
+label{
+	font-weight: bold;
+}
+
+p{
+	color:red;
+}
+
+input:focus{
+    border: 1px solid green !important;
+    box-shadow: 0 0 3px green !important;
+    -moz-box-shadow: 0 0 3px green !important;
+    -webkit-box-shadow: 0 0 3px green !important;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Registration - Page to Register Users
+		</title>
+
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'registration.css' %}">
+
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+	</head>
+<body>
+	<div class="container">
+		<div style="margin-bottom: 30px">
+			<h1> 
+				<center>
+					Sign Up to Register
+				</center>
+			</h1>
+		</div>
+		<div class="row">
+
+			<div class="col-2">
+			</div>
+
+			<div class="col-8">
+				<form name="f1" method="POST" action="registration" role="form">
+					{% csrf_token %}
+					<div class="form-group">
+						<label>First Name</label>
+						<input type="text" name="first_name" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Last Name</label>
+						<input type="text" name="last_name" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Email</label>
+						<input type="email" name="email" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Username</label>
+						<input type="text" name="username" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Password</label>
+						<input type="password"  name="password1" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Confirm Password</label>
+						<input type="password" name="password2" class="form-control">
+					</div>
+					<br>
+					<div class="form-group">
+						<center>
+							<button class="btn btn-success" name="submit">
+								<b>Register</b>
+							</button>
+						</center>
+					</div>
+				</form>
+			</div>
+			
+			<div class="col-2">
+			</div>
+		
+		</div>
+
+		<div>
+			{% for message in messages %}
+				<p> {{ message }} </p>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+</html>

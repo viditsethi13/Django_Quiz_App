@@ -1,0 +1,76 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<title>
+			Quiz Me Up - A Quizing Platform To Test Your Knowledge
+		</title>
+
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<div style="margin-bottom: 30px">
+				<h1> 
+					<center>
+						Quiz Me Up 
+					</center>
+				</h1>
+			</div>
+			<div class="row">
+				<span>
+					Quiz Me Up(also simply known as QMU) is a Database System Quizzing Platform. It is a MCQ based approach to test your knowledge of Database System. In this quiz, user gets 5 Random questions from the pool of about 50 questions. Test terminates when user gives a wrong answer or user answers all 5 questions. Platform lets you tracks your performance. It shows your last 2 quiz score. Quiz yourself to check your grasp on Database System
+				</span>
+			</div>
+			
+			<div style="margin: 40px">
+				<center>
+					<img src="{% static 'home.jpg' %}" >
+				</center>
+			</div>
+			
+			<div class="row">
+				<div class="col-6">
+					<center>
+						<form name="f1" action="registration" method="GET" role="form">
+							{% csrf_token %}
+							<div class="form-group">
+								<button class="btn btn-success">
+									<b>Sign Up</b>
+								</button>
+							</div>
+							<div class="form-group">
+								<label> Sign Up to Start</label>
+							</div>
+						</form>
+					</center>
+				</div>
+
+				<div class="col-6">
+					<center>
+						<form name="f2" action="login" method="GET" role="form"> 
+							{% csrf_token %}
+							<div class="form-group">
+								<button class="btn btn-success">
+									<b>Sign In</b>
+								</button>
+							</div>
+							<div class="form-group">
+								<label> Already a User</label>
+							</div>
+						</form>
+					</center>
+				</div>
+			</div>
+	
+		</div>
+
+
+	</body>
+</html>

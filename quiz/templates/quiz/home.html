@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			{{user.username}}
+		</title>
+
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+		
+	</head>
+	<body>
+		<div class="container">
+			<div style="margin: 30px">
+				<h3>
+					Welcome {{user.username}}	
+				</h3>
+			</div>
+
+			<div class="row" style="margin-bottom: 50px">
+				<span>
+					Quiz Me Up(also simply known as QMU) is a Database System Quizzing Platform. It is a MCQ based approach to test your knowledge of Database System. In this quiz, user gets 5 Random questions from the pool of about 50 questions. Test terminates when user gives a wrong answer or user answers all 5 questions. Platform lets you tracks your performance. It shows your last 2 quiz score. Quiz yourself to check your grasp on Database System
+				</span>
+			</div>
+
+			<div class="row">
+
+				<div class="col-2">
+				</div>
+				
+				<div class="col-8">
+					
+					<center >
+						<h5>
+							Your Last Test Score
+							<br>
+							{{user.t1}}
+						</h5>
+					</center>
+
+					<center style="margin-bottom: 30px">
+						<p>
+							<h5>
+								Number of Test Taken by You
+								<br>
+								{{ user.no_of_test }}
+							</h5>
+						</p>
+					</center>
+
+					<center style="margin-bottom: 60px">
+						<h6>
+							Last 2 Test Score
+							<br>
+							{{ user.t2 }}
+							<br>
+							{{ user.t3 }}
+						</h6>
+					</center>
+
+					<div class="row">
+						
+						<div class="col-6">
+							<center>
+								<form name="f1" method="GET" action="exam" role="form">
+									{% csrf_token %}
+									<div >
+										<button class="btn btn-success" name="start_test">
+											<b>Take Quiz</b>
+										</button>
+									</div>
+								</form>
+							</center>
+						</div>
+
+						<div class="col-6">
+							<center>
+								<form role="form" name="f1" method="GET" action="logout">
+									{% csrf_token %}
+									<div >
+										<button class="btn btn-success" name="Logout">
+											<b>Logout</b>
+										</button>
+									</div>
+								</form>
+							</center>
+						</div>
+
+					</div>
+				</div>
+				
+				<div class="col-2">
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>
