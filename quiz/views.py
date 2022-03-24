@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
-from .models import question,user_detail,temparory
+from .models import question_database,user_detail,temparory,question_java,question_algorithm,question_python
 
 from random import shuffle
 
@@ -15,7 +15,6 @@ def login(request):
 	if request.method=='POST':
 		username=request.POST['username']
 		password=request.POST['password']
-
 		user=auth.authenticate(username=username,password=password)
 
 		if user:
@@ -28,7 +27,7 @@ def login(request):
 			user=user_detail.objects.get(username=username)
 			return redirect('home')
 		else:
-			messages.info(request,'Incorrect Credentials')
+			messages.info(request,'Incorrect username or password')
 			return redirect('login')
 	else:
 		if request.user.is_authenticated:
@@ -60,10 +59,10 @@ def registration(request):
 					messages.info(request,'Email is not Unique\nTry Again')
 					return redirect("registration")
 			else:
-				messages.info(request,'UserName is not Unique\nTry Again')
+				messages.info(request,'Username is not Unique\nTry Again')
 				return redirect("registration")
 		else:
-			messages.info(request,'Password not Same\nTry Again')
+			messages.info(request,'Password is not Same\nTry Again')
 			return redirect("registration")
 	else:
 		return render(request,'quiz/registration.html')
@@ -74,7 +73,7 @@ def home(request):
 		user=user_detail.objects.get(username=username)
 		return render(request,'quiz/home.html',{'user':user})
 	else:
-		return render(request,'quiz/login.html')
+		return redirect('/login')
 
 def logout(request):
 	temparory.objects.all().delete()
@@ -84,9 +83,10 @@ def logout(request):
 def quizzing(request):
 	if request.method=='GET':
 		global c
+		number = temparory.objects.all().count()
 		q=temparory.objects.all().first()
 		if q:
-			return render(request,'quiz/quizzing.html',{'question':q,'c':c})
+			return render(request,'quiz/quizzing.html',{'question':q,'c':c,'number':c+1,'question_count':number})
 		else:
 			username=request.user.username
 			u=user_detail.objects.get(username=username)
@@ -102,31 +102,49 @@ def quizzing(request):
 		q=request.POST['question']
 		q=temparory.objects.get(question_text=q)
 		c=int(request.POST['count'])
+		msg=dict()
 		if q.answer==ans:
+			# Right Answers
+			msg={
+				"title":"Right",
+				"message":"Correct Answer",
+			}
 			temparory.objects.all().first().delete()
-			x=temparory.objects.all().count()
 			c=c+1
-			return redirect('quizzing')
+			return render(request,'quiz/solution.html',{'message':msg,'question':q,'ans':ans})
 		else:
-			x=temparory.objects.all().count()
-			username=request.user.username
-			u=user_detail.objects.get(username=username)
-			u.no_of_test=u.no_of_test+1
-			u.t3=u.t2
-			u.t2=u.t1
-			u.t1=c
-			u.save()
-			c=0
-			return render(request,'quiz/home.html',{'user':u})
+			# Wrong answer
+			temparory.objects.all().delete()
+			if ans == 5:
+				msg={
+				"title":"Terminated",
+				"message":"Quiz Terminated",
+				}
+			else:
+				msg={
+					"title":"Wrong",
+					"message":"Incorrect Answer, Quiz over",
+				}
+			return render(request,'quiz/solution.html',{'message':msg,'question':q,'ans':ans})
 
 def exam(request):
-	if request.method=='GET':
+	if request.method=='POST':
+		test_type = request.POST.get("type")
 		temparory.objects.all().delete()
-		q=question.objects.all()
+		if test_type == 'database':
+			q=question_database.objects.all()
+		elif test_type == 'java':
+			q=question_java.objects.all()
+		elif test_type == 'python':
+			q=question_python.objects.all()
+		else:
+			q=question_algorithm.objects.all()
+
 		q=list(q)
 		shuffle(q)
 		q=q[:5]
 		shuffle(q)
+
 		objs = [
 		    temparory(
 		        question_text=e.question_text,
@@ -141,23 +159,14 @@ def exam(request):
 		qt = temparory.objects.bulk_create(objs=objs)
 		return redirect('quizzing')
 
+def message(request):
+	return redirect('quizzing')
 
-def submit(request):
-	q=question.objects.all()
-	objs = [
-	    temparory(
-	        question_text=e.question_text,
-	        choice1=e.choice1,
-	        choice2=e.choice2,
-	        choice3=e.choice3,
-	        choice4=e.choice4,
-	        answer=e.answer
-	    )
-	    for e in q
-	]
-	qt= temparory.objects.bulk_create(objs=objs)
-	return HttpResponse("DONE")
+def error_404(request, exception):
+    return render(request,'quiz/404.html')
 
-def show(request):
-	temparory.objects.all().first().delete()
-	return HttpResponse(temparory.objects.all().first().question_text)
+def contact(request):
+	return render(request,'quiz/contact.html')
+
+def about(request):
+	return render(request,'quiz/about.html')

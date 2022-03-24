@@ -1,76 +1,51 @@
-{% load static%}
-<!DOCTYPE html>
-<html>
-	
-	<head>
-		<title>
-			Quiz Me Up - A Quizing Platform To Test Your Knowledge
-		</title>
+{% extends 'quiz/base.html' %}
 
-		{% load static %}
-		<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+{% block title %}
+	Quiz Me Up - Platform to test your Knowledge
+{% endblock title%}
 
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-	</head>
+{% block content %}
+	{% load static %}
 
-	<body>
-		<div class="container">
-			<div style="margin-bottom: 30px">
-				<h1> 
-					<center>
-						Quiz Me Up 
-					</center>
-				</h1>
-			</div>
-			<div class="row">
-				<span>
-					Quiz Me Up(also simply known as QMU) is a Database System Quizzing Platform. It is a MCQ based approach to test your knowledge of Database System. In this quiz, user gets 5 Random questions from the pool of about 50 questions. Test terminates when user gives a wrong answer or user answers all 5 questions. Platform lets you tracks your performance. It shows your last 2 quiz score. Quiz yourself to check your grasp on Database System
-				</span>
-			</div>
-			
-			<div style="margin: 40px">
-				<center>
-					<img src="{% static 'home.jpg' %}" >
-				</center>
-			</div>
-			
-			<div class="row">
-				<div class="col-6">
-					<center>
-						<form name="f1" action="registration" method="GET" role="form">
-							{% csrf_token %}
-							<div class="form-group">
-								<button class="btn btn-success">
-									<b>Sign Up</b>
-								</button>
-							</div>
-							<div class="form-group">
-								<label> Sign Up to Start</label>
-							</div>
-						</form>
-					</center>
-				</div>
-
-				<div class="col-6">
-					<center>
-						<form name="f2" action="login" method="GET" role="form"> 
-							{% csrf_token %}
-							<div class="form-group">
-								<button class="btn btn-success">
-									<b>Sign In</b>
-								</button>
-							</div>
-							<div class="form-group">
-								<label> Already a User</label>
-							</div>
-						</form>
-					</center>
-				</div>
-			</div>
-	
-		</div>
+	<div class="container mt-2">
+	<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+	  <div class="carousel-inner">
 
 
-	</body>
-</html>
+	    <div class="carousel-item active">
+	      <img id="home-img" style="height: 450px; width: 1100px" src="{% static 'home.jpg' %}" class="d-block" alt="...">
+	    </div>
+	    <div class="carousel-item">
+	      <div class="row">
+	      		<div class="col-2">
+	      		</div>
+	      		<div class="col-8 border p-4 m-3 rounded border-3">
+	      			<div>
+	      				<h3> About Quiz Me Up </h3>
+	      			</div>
+	      			<br>
+	      			<div>
+	      				<p> Jibba Jabber was a doll made by the toy company Ertl in the mid-1990s. The dolls came with various hair colors including red, blue, pink and green. The female version of the doll (called Ms. Jibba Jabber) had a pink body with pink nose and the male version had a black body with yellow nose. The distinguishing property of the Jibba Jabber was the distinct 'choking' or 'strangling' sound (resembling a groan tube) made by the wobbling head when shaken. When Ertl was told about Shaken Baby Syndrome, the company responded, as reported by the US Advisory Board on Child Abuse and Neglect, by "plac[ing] an insert in Jibba Jabber packaging explaining that while Jibba Jabber is for fun, a lethal form of child abuse involves the shaking of babies. The pamphlet lists seven ways to react positively to a child rather than resorting to violence."</p>
+	      			</div>
+	      			<br>
+	      			<div>
+	      				<p class="fw-bold"> Developed By Vidit Sethi</p>
+	      			</div>
+	      		</div>
+	      		<div class="col-2">
+	      		</div>
+	      </div>
+	    </div>
+	  </div>
+
+	  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="visually-hidden">Previous</span>
+	  </button>
+	  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="visually-hidden">Next</span>
+	  </button>
+	</div>
+
+{% endblock content%}

@@ -1,75 +1,60 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>
-			Login - Enter your Username and password to Sign in
-		</title>
+{% extends 'quiz/base.html' %}
 
-		{% load static %}
-		<link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
+{% block title %}
+	Sign In - Enter your username and password to Sign in to your account
+{% endblock title%}
 
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-	</head>
+{% block content %}
 	
-	<body>
-		<div class="container">
-			<div style="margin-bottom: 30px">
+	<div class="row m-5">
+		<div class="col-4">
+		</div>
+
+		<div class="col-4 p-3 border rounded border-3">
+			<h2>
+				<p> Sign In to Your Account </p>
+			</h2>
+
+			<div>
+				{% for message in messages %}
+					<center>
+						<p> {{ message }} </p>
+					</center>
+				{% endfor %}
+			</div>
+			
+			<form name="f1" method="POST" action=" " role="form" style="margin-bottom: 30px">
+				{% csrf_token %}
+				<br>
+				<div class="form-group">
+					<input type="text" placeholder="Username" name="username" class="form-control" required>
+				</div>
+				<br>
+				<div class="form-group">
+					<input type="password" placeholder="Password" name="password" class="form-control" required>
+				</div>
+				<br>
+				<div class="form-group">
+					<center>
+						<button class="btn btn-primary" name="Sign in">
+							<b>Sign In</b>
+						</button>
+					</center>
+				</div>
+			</form>
+			<br>
+			<div class="form-group">
 				<center>
-					<h1>Login</h1>
+					<p>
+						Need an Account? <a href="/registration"> Sign Up </a>
+					</p>
 				</center>
 			</div>
 
-			<div class="row">
-				<div class="col-2">
-				</div>
-
-				<div class="col-8">
-					<form name="f1" method="POST" action=" " role="form" style="margin-bottom: 30px">
-						{% csrf_token %}
-						<div class="form-group">
-							<label>Username</label>
-							<input type="text" name="username" class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Password</label>
-							<input type="password"  name="password" class="form-control">
-						</div>
-						<br>
-						<div class="form-group">
-							<center>
-								<button class="btn btn-success" name="Sign in">
-									<b>Sign In</b>
-								</button>
-							</center>
-						</div>
-					</form>
-
-					<form name="f2" method="GET" action="registration" role="form" style="margin-bottom: 30px">
-						{% csrf_token %}
-						<div class="form-group">
-							<center>
-								<button class="btn btn-success" name="Sign Up">
-									<b>Sign Up</b>
-								</button>
-							</center>
-						</div>
-					</form>
-
-					<div>
-						{% for message in messages %}
-							<center>
-								<p> {{ message }} </p>
-							</center>
-						{% endfor %}
-					</div>
-
-				</div>
-				
-				<div class="col-2">
-				</div>
-			</div>
 		</div>
+		
+		<div class="col-4">
+		</div>
+	</div>
 
-	</body>
-</html>
+{% endblock content%}

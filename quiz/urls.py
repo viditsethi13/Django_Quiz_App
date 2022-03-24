@@ -9,6 +9,7 @@ urlpatterns=[
 	path('logout',views.logout,name="logout"),
 	path('quizzing',views.quizzing,name="quizzing"),
 	path('exam',views.exam,name="exam"),
-	path('submit',views.submit,name="submit"),
-	path('show',views.show,name="show")
+	path('message',views.message,name="message"),
+	path('contact',views.contact,name="contact"),
+	path('about',views.about,name="about")
 ]

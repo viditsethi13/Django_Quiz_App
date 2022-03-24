@@ -13,7 +13,18 @@ class user_detail(models.Model):
 	def __str__(self):
 		return self.username
 
-class question(models.Model):
+class question_database(models.Model):
+	question_text=models.CharField(max_length=500)
+	choice1=models.CharField(max_length=200)
+	choice2=models.CharField(max_length=200)
+	choice3=models.CharField(max_length=200)
+	choice4=models.CharField(max_length=200)
+	answer=models.IntegerField()
+	question_type=models.CharField(max_length=200,null=True,blank=True)
+	def __str__(self):
+		return self.question_text
+
+class temparory(models.Model):
 	question_text=models.CharField(max_length=500)
 	choice1=models.CharField(max_length=200)
 	choice2=models.CharField(max_length=200)
@@ -23,7 +34,27 @@ class question(models.Model):
 	def __str__(self):
 		return self.question_text
 
-class temparory(models.Model):
+class question_java(models.Model):
+	question_text=models.CharField(max_length=500)
+	choice1=models.CharField(max_length=200)
+	choice2=models.CharField(max_length=200)
+	choice3=models.CharField(max_length=200)
+	choice4=models.CharField(max_length=200)
+	answer=models.IntegerField()
+	def __str__(self):
+		return self.question_text
+
+class question_algorithm(models.Model):
+	question_text=models.CharField(max_length=500)
+	choice1=models.CharField(max_length=200)
+	choice2=models.CharField(max_length=200)
+	choice3=models.CharField(max_length=200)
+	choice4=models.CharField(max_length=200)
+	answer=models.IntegerField()
+	def __str__(self):
+		return self.question_text
+
+class question_python(models.Model):
 	question_text=models.CharField(max_length=500)
 	choice1=models.CharField(max_length=200)
 	choice2=models.CharField(max_length=200)

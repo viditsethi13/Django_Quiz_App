@@ -20,3 +20,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('quiz.urls'))
 ]
+handler404 = 'quiz.views.error_404'

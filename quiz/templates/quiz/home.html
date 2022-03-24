@@ -1,101 +1,94 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>
-			{{user.username}}
-		</title>
+{% extends 'quiz/base.html' %}
 
-		{% load static %}
-		<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+{% block title %}
+	{{user.username}}
+{% endblock title%}
 
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-		
-	</head>
-	<body>
-		<div class="container">
-			<div style="margin: 30px">
-				<h3>
-					Welcome {{user.username}}	
-				</h3>
-			</div>
-
-			<div class="row" style="margin-bottom: 50px">
-				<span>
-					Quiz Me Up(also simply known as QMU) is a Database System Quizzing Platform. It is a MCQ based approach to test your knowledge of Database System. In this quiz, user gets 5 Random questions from the pool of about 50 questions. Test terminates when user gives a wrong answer or user answers all 5 questions. Platform lets you tracks your performance. It shows your last 2 quiz score. Quiz yourself to check your grasp on Database System
-				</span>
-			</div>
-
-			<div class="row">
-
-				<div class="col-2">
-				</div>
-				
-				<div class="col-8">
+{% block content %}
+	
+	<div class="row m-5">
+			
+		<div class="col-md-5 border border-3 rounded p-4">
+			<center>
+				<h3 class="mb-4"> <span> Stats</span> </h3>
+			</center>
+			<table class="table">
+				<tbody>
+					<tr>
+					    <th scope="row">Number of Test Taken</th>
+					    <td class="text-end">{{ user.no_of_test }}</td>
+					    <td class="text-end">N/A</td>
+					</tr>
+					<tr>
+					    <th scope="row">Cumalative Test Score</th>
+					    <td class="text-end">{{ user.total_score }}</td>
+					    <td class="text-end">N/A</td>
+					</tr>
+				    <tr>
+					    <th scope="row">Last Test Score</th>
+					    <td class="text-end">{{ user.t1 }}</td>
+					    <td class="text-end">N/A</td>
+				  	</tr>
+				  	<tr>
+				  	    <th scope="row">Last 2 Test Score</th>
+				  	    <td class="text-end">{{ user.t2 }}</td>
+				  	    <td class="text-end">{{ user.t3 }}</td>
+				  	</tr>
+				</tbody>
+			</table>
+		</div>
 					
-					<center >
-						<h5>
-							Your Last Test Score
-							<br>
-							{{user.t1}}
-						</h5>
+		<div class="col-md-5 offset-md-2 border border-3 rounded p-4">
+			<div class="row">
+				<div class="col-3">
+				</div>
+				<div class="col-6">
+					<center>
+						<h3> <span> Quiz Topics</span> </h3>
 					</center>
-
-					<center style="margin-bottom: 30px">
-						<p>
-							<h5>
-								Number of Test Taken by You
-								<br>
-								{{ user.no_of_test }}
-							</h5>
-						</p>
-					</center>
-
-					<center style="margin-bottom: 60px">
-						<h6>
-							Last 2 Test Score
-							<br>
-							{{ user.t2 }}
-							<br>
-							{{ user.t3 }}
-						</h6>
-					</center>
-
-					<div class="row">
-						
-						<div class="col-6">
-							<center>
-								<form name="f1" method="GET" action="exam" role="form">
-									{% csrf_token %}
-									<div >
-										<button class="btn btn-success" name="start_test">
-											<b>Take Quiz</b>
-										</button>
-									</div>
-								</form>
-							</center>
-						</div>
-
-						<div class="col-6">
-							<center>
-								<form role="form" name="f1" method="GET" action="logout">
-									{% csrf_token %}
-									<div >
-										<button class="btn btn-success" name="Logout">
-											<b>Logout</b>
-										</button>
-									</div>
-								</form>
-							</center>
-						</div>
-
+					<br>
+					<form name="f1" method="POST" action="exam" role="form">
+					{% csrf_token %}
+					<div class="form-check">
+					  <input class="form-check-input" type="radio" name="type" id="type" value="database" checked>
+						  <label class="form-check-label">
+						    Database
+						  </label>
 					</div>
-				</div>
-				
-				<div class="col-2">
-				</div>
+					<div class="form-check">
+					  <input class="form-check-input" type="radio" name="type" id="type" value="algorithm">
+					  	<label class="form-check-label">
+					    	Algorithms
+					  	</label>
+					</div>
+					<div class="form-check">
+					  <input class="form-check-input" type="radio" name="type" id="type" value="java">
+					  	<label class="form-check-label">
+					    	Java
+					  	</label>
+					</div>
+					<div class="form-check">
+					  <input class="form-check-input" type="radio" name="type" id="type" value="python">
+					  	<label class="form-check-label">
+					    	Python
+					  	</label>
+					</div>
 
+					<br>
+					<br>
+					
+						<center>
+							<button class="btn btn-primary" name="start_test">
+								<b>Start Quiz</b>
+							</button>
+						</center>
+					</form>
+				</div>
+				<div class="col-3">	
+				</div>
 			</div>
 		</div>
-	</body>
-</html>
+
+	</div>
+
+{% endblock content%}
